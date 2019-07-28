@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 primary">
+      <div class="pad10 white--text font15">Edit Payment</div>
+    </div>
+  </div>
+
+  <section>
+    <%= form_for @payment do |f| %>
+      <%= render "payments/form", :f => f %>
+    <% end %>
+  </section>
+  
+</div>

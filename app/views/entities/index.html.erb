@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 primary">
+      <div class="pad10 white--text font15">Entities</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 text-left pad10">
+      <%= link_to 'Home', root_path %> > Entities
+    </div>
+    <div class="col-md-6 text-right">
+      <%= link_to new_entity_path do %>
+        <button class="btn btn-success mar10" type="submit">Add New</button>
+      <% end %>
+    </div>
+  </div>
+
+  <table class="table">
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th></th>
+    </tr>
+
+    <% @entities && @entities.each do |e| %>
+      <tr>
+        <td><%= e.id %></td>
+        <td>
+          <b><span class="font12"><%= e.name %></span></b>
+          <br>
+          mobile: <%= e.mobile %>
+          <br>
+          Address: <%= e.address %>
+          <br>
+          Company Name: <%= e.company_name %>
+        </td>
+        <td>
+          <%= link_to edit_entity_path(e) do %>
+            <button class="btn btn-info" type="submit">Edit</button>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+</div>

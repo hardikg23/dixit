@@ -1,0 +1,47 @@
+<form>
+  <div class="form-group">
+    <label class="padt10">Party</label>
+    <%= f.collection_select :entity_id, Entity.all.order('name') , :id, :get_entity_name_for_select_options, {}, { :class => ""} %>
+  </div>
+  <div class="form-group">
+    <label class="padt10">Sale Type</label>
+    <%= select("purchase", "sale_type", [['Polish', 'polish'],['Rough', 'rough']], {}, { :class => ""})%>
+  </div>
+  <div class="form-group">
+    <label class="padt10">Description</label>
+    <%= f.text_field :description, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <label class="padt10">Quantity</label>
+    <%= f.text_field :quantity, :required => true, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <label class="padt10">Amount Type</label>
+    <%= select("purchase", "amount_type", [['Rupees', 'rupees'],['Dollar', 'dollar']], {}, { :class => ""})%>
+  </div>
+  <div class="form-group">
+    <label class="padt10">Amount</label>
+    <%= f.text_field :amount, :required => true, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <label class="padt10">Conversion Rate</label>
+    <%= f.text_field :conversion_rate, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <label class="padt10">Payment Type</label>
+    <%= select("purchase", "payment_type", [['Cash Payment', 'cash_payment'],['Cheque Payment', 'cheque_payment'],['Angadia Payment', 'angadia_payment']], {}, { :class => ""})%>
+  </div>
+  <div class="form-group">
+    <label class="padt10">purchase Date</label>
+    <%= f.date_select :purchase_date %>
+  </div>
+  <div class="form-group">
+    <label class="padt10">Payment Date</label>
+    <%= f.date_select :payment_date %>
+  </div>
+  <%= f.submit "Save", :class => "btn btn-success" %>
+  <%= link_to purchases_path do %>
+    <button type="button" class="btn btn-danger">Cancel</button>
+  <% end %>
+</form>
+

@@ -1,0 +1,21 @@
+// "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.white--text{ color: #fff }
+
+.primary{ background-color: #1a237e; }
+.success{ background-color: #5cb85c; }
+.danger{ background-color: #d43f3a; }
+
+.pad10{ padding: 10px; }
+.pad30{ padding: 30px; }
+
+.padt10{ padding-top: 10px; }
+
+.mar10{ margin: 10px; }
+
+
+.font12{ font-size: 1.2em; }
+.font15{ font-size: 1.5em; }
+.font30{ font-size: 3.0em; }

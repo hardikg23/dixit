@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 primary">
+      <div class="pad10 white--text font15">Purchases</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 text-left pad10">
+      <%= link_to 'Home', root_path %> > Purchases
+    </div>
+    <div class="col-md-6 text-right">
+      <%= link_to new_purchase_path do %>
+        <button class="btn btn-success mar10" type="submit">Add New</button>
+      <% end %>
+    </div>
+  </div>
+
+  <table class="table">
+    <tr>
+      <th>Date</th>
+      <th>Party</th>
+      <th>Carat</th>
+      <th>Amount</th>
+      <th>Total</th>
+      <th>Type</th>
+    </tr>
+
+    <% @purchases && @purchases.each do |p| %>
+      <tr>
+        <td><%= p.payment_date.strftime("%d/%m/%y") %></td>
+        <td>
+          <b><span class="font12"><%= p.entity && p.entity.name %></span></b>
+        </td>
+        <td><%= p.quantity %></td>
+        <td>
+          <% if p.rupees? %>
+            Rs <%= p.amount %>
+          <% else %>
+            $ <%= p.amount %> <br>(<%= p.conversion_rate %>)
+          <% end %>
+        </td>
+        <td>
+          <% if p.rupees? %>
+            Rs <%= p.amount * p.quantity %>
+          <% else %>
+            $ <%= p.amount * p.quantity * p.conversion_rate %> <br>(<%= p.conversion_rate %>)
+          <% end %>
+        </td>
+        <td><%= p.payment_type %></td>
+        <td>
+          <%= link_to edit_purchase_path(p) do %>
+            <button class="btn btn-info" type="submit">Edit</button>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+</div>

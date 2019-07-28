@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 primary">
+      <div class="pad10 white--text font15">Sales</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 text-left pad10">
+      <%= link_to 'Home', root_path %> > Sales
+    </div>
+    <div class="col-md-6 text-right">
+      <%= link_to new_sale_path do %>
+        <button class="btn btn-success mar10" type="submit">Add New</button>
+      <% end %>
+    </div>
+  </div>
+
+  <table class="table">
+    <tr>
+      <th>Date</th>
+      <th>Party</th>
+      <th>Carat</th>
+      <th>Amount</th>
+      <th>Total</th>
+      <th>Type</th>
+      <th>Terms</th>
+    </tr>
+
+    <% @sales && @sales.each do |s| %>
+      <tr>
+        <td><%= s.payment_date.strftime("%d/%m/%y") %></td>
+        <td>
+          <b><span class="font12"><%= s.entity.name %></span></b>
+        </td>
+        <td><%= s.final_quantity %></td>
+        <td>
+          <% if s.rupees? %>
+            Rs <%= s.amount %>
+          <% else %>
+            $ <%= s.amount %> <br>(<%= s.conversion_rate %>)
+          <% end %>
+        </td>
+        <td>
+          <% if s.rupees? %>
+            Rs <%= s.amount * s.final_quantity %>
+          <% else %>
+            $ <%= s.amount * s.final_quantity * s.conversion_rate %> <br>(<%= s.conversion_rate %>)
+          <% end %>
+        </td>
+        <td><%= s.payment_type %></td>
+        <td><%= (s.payment_date + s.terms.days).strftime("%d/%m/%y") if s.terms.present? %></td>
+        <td>
+          <%= link_to edit_sale_path(s) do %>
+            <button class="btn btn-info" type="submit">Edit</button>
+          <% end %>
+          <%= link_to new_payment_path(sale_id: s.id) do %>
+            <button class="btn btn-info" type="submit">Add Payment</button>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+</div>

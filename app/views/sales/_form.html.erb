@@ -1,0 +1,62 @@
+<form>
+  <div class="form-group">
+    <label class="padt10">Party</label>
+    <%= f.collection_select :entity_id, Entity.all.order('name') , :id, :get_entity_name_for_select_options, {}, { :class => ""} %>
+  </div>
+  <div class="form-group">
+    <label class="padt10">Sale Type</label>
+    <%= select("sale", "sale_type", [['Polish', 'polish'],['Rough', 'rough']], {}, { :class => ""})%>
+  </div>
+  <div class="form-group">
+    <label class="padt10">Description</label>
+    <%= f.text_field :description, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <label class="padt10">Broker Name</label>
+    <%= f.text_field :broker_name, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <label class="padt10">Quantity</label>
+    <%= f.text_field :quantity, :required => true, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <label class="padt10">Return Quantity</label>
+    <%= f.text_field :return_quantity, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <label class="padt10">Final Quantity</label>
+    <%= f.text_field :final_quantity, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <label class="padt10">Amount Type</label>
+    <%= select("sale", "amount_type", [['Rupees', 'rupees'],['Dollar', 'dollar']], {}, { :class => ""})%>
+  </div>
+  <div class="form-group">
+    <label class="padt10">Amount</label>
+    <%= f.text_field :amount, :required => true, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <label class="padt10">Conversion Rate</label>
+    <%= f.text_field :conversion_rate, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <label class="padt10">Payment Type</label>
+    <%= select("sale", "payment_type", [['Cash Payment', 'cash_payment'],['Cheque Payment', 'cheque_payment'],['Angadia Payment', 'angadia_payment']], {}, { :class => ""})%>
+  </div>
+  <div class="form-group">
+    <label class="padt10">Payment Date</label>
+    <%= f.date_select :payment_date %>
+  </div>
+
+  <div class="form-group">
+    <label class="padt10">terms</label>
+    <%= f.text_field :terms, class: 'form-control' %>
+  </div>
+  
+  <%= f.submit "Save", :class => "btn btn-success" %>
+  <%= link_to sales_path do %>
+    <button type="button" class="btn btn-danger">Cancel</button>
+  <% end %>
+</form>
+
