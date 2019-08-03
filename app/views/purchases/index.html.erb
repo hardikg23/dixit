@@ -16,14 +16,16 @@
     </div>
   </div>
 
-  <table class="table">
+  <table class="table table-striped table-bordered">
     <tr>
       <th>Date</th>
       <th>Party</th>
       <th>Carat</th>
       <th>Amount</th>
       <th>Total</th>
+      <th>Total Paid</th>
       <th>Type</th>
+      <th></th>
     </tr>
 
     <% @purchases && @purchases.each do |p| %>
@@ -42,16 +44,23 @@
         </td>
         <td>
           <% if p.rupees? %>
-            Rs <%= p.amount * p.quantity %>
+            <% total_amount = p.amount * p.quantity %>
           <% else %>
-            $ <%= p.amount * p.quantity * p.conversion_rate %> <br>(<%= p.conversion_rate %>)
+            <% total_amount = p.amount * p.quantity * p.conversion_rate %>
           <% end %>
+          &#8377;<%= number_with_delimiter(total_amount) %>
         </td>
-        <td><%= p.payment_type %></td>
+        <td class="<%= total_amount <= p.total_paid ? 'success' : 'danger' %>">          
+          &#8377;<%= number_with_delimiter(p.total_paid) %>
+        </td>
+        <td><%= p.get_payment_type %></td>
         <td>
           <%= link_to edit_purchase_path(p) do %>
             <button class="btn btn-info" type="submit">Edit</button>
           <% end %>
+          <%= link_to new_payment_path(purchase_id: p.id) do %>
+              <button class="btn btn-info" type="submit">Payments</button>
+            <% end %>
         </td>
       </tr>
     <% end %>

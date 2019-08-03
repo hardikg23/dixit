@@ -3,6 +3,9 @@
     <% if @sale.present? %>
       <label class="padt10">Party: <%= @sale.entity.name %></label>
       <%= hidden_field_tag :sale_id, @sale.id %>
+    <% elsif @purchase.present? %>
+      <label class="padt10">Party: <%= @purchase.entity.name %></label>
+      <%= hidden_field_tag :purchase_id, @purchase.id %>
     <% end %>
   </div>
   <div class="form-group">

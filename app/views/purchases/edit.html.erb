@@ -4,10 +4,14 @@
       <div class="pad10 white--text font15">Edit Purchase</div>
     </div>
   </div>
-
+  <div class="row">
+    <div class="col-md-6 text-left pad10">
+      <%= link_to 'Home', root_path %> > <%= link_to 'Purchases', purchases_path %> > Edit
+    </div>
+  </div>
   <section>
     <%= form_for @purchase do |f| %>
-      <%= render "purchase/form", :f => f %>
+      <%= render "purchases/form", :f => f %>
     <% end %>
   </section>
   

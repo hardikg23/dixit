@@ -8,4 +8,14 @@ class Purchase < ApplicationRecord
 
   validates_presence_of :amount_type, :sale_type, :payment_type
 
+  def get_payment_type
+    if self.cash_payment?
+      'CASH'
+    elsif self.cheque_payment?
+      'CHEQUE'
+    else
+      'ANGADIA'
+    end
+  end
+
 end

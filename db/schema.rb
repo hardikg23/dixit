@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2019_07_28_044411) do
     t.integer "amount", null: false
     t.integer "amount_type", null: false
     t.integer "conversion_rate"
+    t.integer "total_paid", default: 0
     t.integer "payment_type", null: false
     t.datetime "payment_date"
     t.datetime "purchase_date"

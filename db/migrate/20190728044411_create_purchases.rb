@@ -11,6 +11,7 @@ class CreatePurchases < ActiveRecord::Migration[5.2]
       t.integer :amount, null: false
       t.integer :amount_type, null: false
       t.integer :conversion_rate
+      t.integer :total_paid, default: 0
 
       t.integer :payment_type, null: false
       t.datetime :payment_date

@@ -7,11 +7,11 @@ class PaymentsController < ApplicationController
   end
 
   def create
-    @payment = @sale.payments.new(payment_params)
-    @payment.entity_id = @sale.entity_id
+    @payment = @parent.payments.new(payment_params)
+    @payment.entity_id = @parent.entity_id
     if @payment.save
       flash[:notice] = 'payment successfully created.'
-      redirect_to (@sale.present? ?  sales_path : purchases_path)
+      redirect_to (@parent.class == Sale ?  sales_path : purchases_path)
     else
       flash[:error] = @payment.errors.full_messages.first
       render :new
@@ -41,8 +41,8 @@ class PaymentsController < ApplicationController
     def find_parent
       if params[:sale_id].present?
         @parent = @sale = Sale.find_by_id(params[:sale_id])
-      else params[:sale_id].present?
-        @parent = @sale = Sale.find_by_id(params[:sale_id])
+      else params[:purchase_id].present?
+        @parent = @purchase = Purchase.find_by_id(params[:purchase_id])
       end
     end
 

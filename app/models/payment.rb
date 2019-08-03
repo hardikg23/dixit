@@ -14,6 +14,8 @@ class Payment < ApplicationRecord
     all_payment_sum = parent.payments.sum(:amount)
     if parent.class == Sale
       parent.update_columns(total_received: all_payment_sum)
+    else
+      parent.update_columns(total_paid: all_payment_sum)
     end
   end
 
