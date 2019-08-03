@@ -36,7 +36,6 @@ class PurchasesController < ApplicationController
 
   private
     def purchase_params
-      binding.pry
       params.require(:purchase).permit(:entity_id, :description, :sale_type, :quantity, :amount, :amount_type, :payment_type, :conversion_rate, :payment_date, :purchase_date)
     end
 

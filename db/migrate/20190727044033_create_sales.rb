@@ -8,12 +8,12 @@ class CreateSales < ActiveRecord::Migration[5.2]
       t.string :broker_name
 
       t.float :quantity, null: false
-      t.float :return_quantity
-      t.float :final_quantity
+      t.float :return_quantity, default: 0
 
       t.integer :amount, null: false
       t.integer :amount_type, null: false
       t.integer :conversion_rate
+      t.integer :total_received, default: 0
 
       t.integer :payment_type, null: false
       t.datetime :payment_date

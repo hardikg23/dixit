@@ -4,7 +4,7 @@ class CreatePayments < ActiveRecord::Migration[5.2]
       t.integer :entity_id, null: false
       
       t.integer :paymentable_id
-      t.integer :paymentable_type     
+      t.string :paymentable_type     
 
       t.string :description
 

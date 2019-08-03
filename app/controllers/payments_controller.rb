@@ -1,19 +1,17 @@
 class PaymentsController < ApplicationController
-
-  def index
-    @payments = Payment.includes(:entity, :sale).order('id desc').paginate(page: current_page, per_page: per_page)
-  end
+  before_action :find_parent, only: [:new, :create, :edit, :update]
 
   def new
     @payment = Payment.new
-    @sale = Sale.find_by_id(params[:sale_id])
+    @payments = @parent.payments
   end
 
   def create
-    @payment = Payment.new(payment_params)
+    @payment = @sale.payments.new(payment_params)
+    @payment.entity_id = @sale.entity_id
     if @payment.save
       flash[:notice] = 'payment successfully created.'
-      redirect_to payments_path
+      redirect_to (@sale.present? ?  sales_path : purchases_path)
     else
       flash[:error] = @payment.errors.full_messages.first
       render :new
@@ -25,10 +23,10 @@ class PaymentsController < ApplicationController
   end
 
   def update
-   @payment = Payment.find_by_id(params[:id])
+    @payment = Payment.find_by_id(params[:id])
     if @payment.update_attributes(payment_params)
       flash[:notice] = 'payment successfully updated.'
-      redirect_to payments_path
+      redirect_to (@payment.paymentable_type == 'Sale' ? sales_path : purchases_path)
     else
       flash[:error] = @payment.errors.full_messages.first
       render :edit
@@ -37,7 +35,15 @@ class PaymentsController < ApplicationController
 
   private
     def payment_params
-      params.require(:payment).permit(:entity_id, :amount, :description, :from_person, :to_person,  :payment_type, :payment_date)
+      params.require(:payment).permit(:amount, :description, :from_person, :to_person,  :payment_type, :payment_date)
+    end
+
+    def find_parent
+      if params[:sale_id].present?
+        @parent = @sale = Sale.find_by_id(params[:sale_id])
+      else params[:sale_id].present?
+        @parent = @sale = Sale.find_by_id(params[:sale_id])
+      end
     end
 
 end

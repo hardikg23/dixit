@@ -16,50 +16,59 @@
     </div>
   </div>
 
-  <table class="table">
-    <tr>
-      <th>Date</th>
-      <th>Party</th>
-      <th>Carat</th>
-      <th>Amount</th>
-      <th>Total</th>
-      <th>Type</th>
-      <th>Terms</th>
-    </tr>
-
-    <% @sales && @sales.each do |s| %>
+  <table class="table table-striped table-bordered">
+    <thead>
       <tr>
-        <td><%= s.payment_date.strftime("%d/%m/%y") %></td>
-        <td>
-          <b><span class="font12"><%= s.entity.name %></span></b>
-        </td>
-        <td><%= s.final_quantity %></td>
-        <td>
-          <% if s.rupees? %>
-            Rs <%= s.amount %>
-          <% else %>
-            $ <%= s.amount %> <br>(<%= s.conversion_rate %>)
-          <% end %>
-        </td>
-        <td>
-          <% if s.rupees? %>
-            Rs <%= s.amount * s.final_quantity %>
-          <% else %>
-            $ <%= s.amount * s.final_quantity * s.conversion_rate %> <br>(<%= s.conversion_rate %>)
-          <% end %>
-        </td>
-        <td><%= s.payment_type %></td>
-        <td><%= (s.payment_date + s.terms.days).strftime("%d/%m/%y") if s.terms.present? %></td>
-        <td>
-          <%= link_to edit_sale_path(s) do %>
-            <button class="btn btn-info" type="submit">Edit</button>
-          <% end %>
-          <%= link_to new_payment_path(sale_id: s.id) do %>
-            <button class="btn btn-info" type="submit">Add Payment</button>
-          <% end %>
-        </td>
+        <th>Date</th>
+        <th>Party</th>
+        <th>Carat</th>
+        <th>Amount</th>
+        <th>Total</th>
+        <th>Received</th>
+        <th>Type</th>
+        <th>Terms</th>
+        <th></th>
       </tr>
-    <% end %>
+    </thead>
+    <tbody>
+      <% @sales && @sales.each do |s| %>
+        <tr>
+          <td><%= s.payment_date.strftime("%d/%m/%y") %></td>
+          <td>
+            <b><span class="font12"><%= s.entity.name %></span></b>
+          </td>
+          <td><%= s.final_quantity %></td>
+          <td>
+            <% if s.rupees? %>
+              &#8377;<%= number_with_delimiter(s.amount.to_i) %>
+            <% else %>
+              $<%= number_with_delimiter(s.amount.to_i) %> <br>(<%= s.conversion_rate %>)
+            <% end %>
+          </td>
+          <td>
+            <% if s.rupees? %>
+              <% total_amount = (s.amount * s.final_quantity).to_i %>
+            <% else %>
+              <% total_amount = (s.amount * s.final_quantity * s.conversion_rate).to_i %>
+            <% end %>
+            &#8377;<%= number_with_delimiter(total_amount) %>
+          </td>
+          <td class="<%= total_amount <= s.total_received ? 'success' : 'danger' %>">          
+            &#8377;<%= number_with_delimiter(s.total_received) %>
+          </td>
+          <td><%= s.get_payment_type %></td>
+          <td><%= (s.payment_date + s.terms.days).strftime("%d/%m/%y") if s.terms.present? %></td>
+          <td>
+            <%= link_to edit_sale_path(s) do %>
+              <button class="btn btn-info" type="submit">Edit</button>
+            <% end %>
+            <%= link_to new_payment_path(sale_id: s.id) do %>
+              <button class="btn btn-info" type="submit">Payments</button>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
   </table>
 
 </div>

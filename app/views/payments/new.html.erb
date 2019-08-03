@@ -4,11 +4,33 @@
       <div class="pad10 white--text font15">Add New Payment</div>
     </div>
   </div>
-
   <section>
     <%= form_for @payment do |f| %>
       <%= render "payments/form", :f => f %>
     <% end %>
   </section>
-  
+  <div class="padt50">
+    All Payments
+    <table class="table table-striped table-bordered">
+      <tr>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Type</th>
+        <th></th>
+      </tr>
+      <% @payments && @payments.each do |p| %>
+        <tr>
+          <td><%= p.payment_date.strftime("%d/%m/%y") %></td>
+          <td><%= p.amount %></td>
+          <td><%= p.get_payment_type %></td>
+          <td>
+            <%= link_to edit_payment_path(p) do %>
+              <button class="btn btn-info" type="submit">Edit</button>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 </div>
+

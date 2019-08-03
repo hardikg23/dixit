@@ -10,4 +10,18 @@ class Sale < ApplicationRecord
 
   validates_presence_of :entity_id, :quantity, :amount, :payment_type
 
+  def final_quantity
+    self.quantity - self.return_quantity
+  end
+
+  def get_payment_type
+    if self.cash_payment?
+      'CASH'
+    elsif self.cheque_payment?
+      'CHEQUE'
+    else
+      'ANGADIA'
+    end
+  end
+
 end

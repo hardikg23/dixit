@@ -1,7 +1,9 @@
 <form>
   <div class="form-group">
-    <label class="padt10">Party: <%= @sale.entity.name %></label>
-    <%= f.hidden_field :entity_id, :value => @sale.entity_id %>
+    <% if @sale.present? %>
+      <label class="padt10">Party: <%= @sale.entity.name %></label>
+      <%= hidden_field_tag :sale_id, @sale.id %>
+    <% end %>
   </div>
   <div class="form-group">
     <label class="padt10">Amount</label>
