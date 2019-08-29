@@ -3,7 +3,7 @@ class PaymentsController < ApplicationController
 
   def new
     @payment = Payment.new
-    @payments = @parent.payments
+    @payments = @parent.payments.order('payment_date')
   end
 
   def create

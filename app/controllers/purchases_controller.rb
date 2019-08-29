@@ -1,7 +1,11 @@
 class PurchasesController < ApplicationController
 
   def index
-    @purchases = Purchase.order('id desc').paginate(page: current_page, per_page: per_page)
+    if display_cheque?
+      @purchases = Purchase.order('id desc').cheque_payment.paginate(page: current_page, per_page: per_page)
+    else
+      @purchases = Purchase.order('id desc').paginate(page: current_page, per_page: per_page)
+    end
   end
 
   def new

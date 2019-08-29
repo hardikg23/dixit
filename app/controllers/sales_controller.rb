@@ -1,7 +1,11 @@
 class SalesController < ApplicationController
 
   def index
-    @sales = Sale.includes(:entity).order('id desc').paginate(page: current_page, per_page: per_page)
+    if display_cheque?
+      @sales = Sale.includes(:entity).cheque_payment.order('id desc').paginate(page: current_page, per_page: per_page)
+    else
+      @sales = Sale.includes(:entity).order('id desc').paginate(page: current_page, per_page: per_page)
+    end
   end
 
   def new

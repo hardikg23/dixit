@@ -45,13 +45,19 @@
               $<%= number_with_delimiter(s.amount.to_i) %> <br>(<%= s.conversion_rate %>)
             <% end %>
           </td>
-          <td>
+          <td align="right">
             <% if s.rupees? %>
               <% total_amount = (s.amount * s.final_quantity).to_i %>
             <% else %>
               <% total_amount = (s.amount * s.final_quantity * s.conversion_rate).to_i %>
             <% end %>
-            &#8377;<%= number_with_delimiter(total_amount) %>
+            <% gst_amount = (s.cheque_payment? ? (total_amount*0.25/100).to_i : 0) %>
+            &#8377;<%= number_with_delimiter(total_amount) %><br>
+            <% if gst_amount > 0 %>
+              <span class="font07">GST</span> + &#8377;<%= number_with_delimiter(gst_amount)%>
+            <% end %>
+            <hr style="margin-top: 0px; margin-bottom: 0px;">
+            <span class="font07">Total</span> = &#8377;<%= number_with_delimiter(total_amount + gst_amount)%>
           </td>
           <td class="<%= total_amount <= s.total_received ? 'success' : 'danger' %>">          
             &#8377;<%= number_with_delimiter(s.total_received) %>

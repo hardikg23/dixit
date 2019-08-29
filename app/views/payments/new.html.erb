@@ -16,6 +16,9 @@
         <th>Date</th>
         <th>Amount</th>
         <th>Type</th>
+        <th>from_person</th>
+        <th>to_person</th>
+        <th>description</th>
         <th></th>
       </tr>
       <% @payments && @payments.each do |p| %>
@@ -23,6 +26,9 @@
           <td><%= p.payment_date.strftime("%d/%m/%y") %></td>
           <td><%= p.amount %></td>
           <td><%= p.get_payment_type %></td>
+          <td><%= p.from_person %></td>
+          <td><%= p.to_person %></td>
+          <td><%= p.description %></td>
           <td>
             <%= link_to edit_payment_path(p) do %>
               <button class="btn btn-info" type="submit">Edit</button>
