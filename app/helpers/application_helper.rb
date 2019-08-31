@@ -4,10 +4,16 @@ module ApplicationHelper
     total_o = 0
     total = 0
     payments.each do |p|
-      total_o = total_o + (p.amount*p.conversion_rate) if p.amount_type == 'dollar'
-      total = total + p.amount
+      if p.amount_type == 'dollar'
+        total_o = total_o + (p.amount*p.conversion_rate)
+        total = total + p.amount
+      end
     end
-    return (total_o/total).round(2)
+    if total == 0
+      return {rate: 0, total: total} 
+    else
+      return {rate: (total_o/total).round(2), total: total} 
+    end
   end
 
 end

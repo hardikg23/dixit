@@ -48,7 +48,7 @@
           <% end %>
         </td>
         <td><%= number_with_delimiter(p.total_paid) %></td>
-        <td><%= get_conversion_rate(p.payments.active) if p.payments.active.present? %></td>
+        <td><%= get_conversion_rate(p.payments.active)[:rate] if p.payments.active.present? %></td>
         <td><%= p.get_payment_type %></td>
         <td><%= p.payment_date.strftime("%d/%m/%y") %></td>
         <td>

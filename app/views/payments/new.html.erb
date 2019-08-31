@@ -38,7 +38,7 @@
       <tr>
         <th>Total</th>
         <th colspan="6">
-          <%= get_conversion_rate(@payments) if @payments %>
+          <%= "#{number_with_delimiter(get_conversion_rate(@payments)[:total])} (#{get_conversion_rate(@payments)[:rate]})" if @payments %>
         </th>
       </tr>
     </table>
