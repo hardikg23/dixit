@@ -20,6 +20,10 @@
     <%= select("purchase", "amount_type", [['Rupees', 'rupees'],['Dollar', 'dollar']], {}, { :class => ""})%>
   </div>
   <div class="form-group">
+    <label class="padt10">Per Carat Rate</label>
+    <%= f.text_field :per_carat_rate, class: 'form-control' %>
+  </div>
+  <div class="form-group">
     <label class="padt10">Amount</label>
     <%= f.text_field :amount, :required => true, class: 'form-control' %>
   </div>
@@ -36,7 +40,7 @@
     <%= f.date_select :purchase_date, order: [:day, :month, :year] %>
   </div>
   <div class="form-group">
-    <label class="padt10">Payment Date</label>
+    <label class="padt10">Due Date</label>
     <%= f.date_select :payment_date, order: [:day, :month, :year]%>
   </div>
   <%= f.submit "Save", :class => "btn btn-success" %>

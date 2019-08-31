@@ -21,42 +21,34 @@
       <th>Date</th>
       <th>Party</th>
       <th>Carat</th>
-      <th>Amount</th>
+      <th>Per Carat</th>
       <th>Total</th>
       <th>Total Paid</th>
       <th>Type</th>
+      <th>Due Date</th>
       <th></th>
     </tr>
 
     <% @purchases && @purchases.each do |p| %>
       <tr>
-        <td><%= p.payment_date.strftime("%d/%m/%y") %></td>
+        <td><%= p.purchase_date.strftime("%d/%m/%y") %></td>
         <td>
           <b><span class="font12"><%= p.entity && p.entity.get_display_name %></span></b>
         </td>
         <td><%= p.quantity %></td>
+        <td><%= p.per_carat_rate %></td>
         <td>
           <% if p.rupees? %>
-            Rs <%= p.amount %>
+            &#8377; <%= number_with_delimiter(p.amount) %>
           <% else %>
-            $ <%= p.amount %> <br>
-            <% if p.conversion_rate.present? %>
-              (<%= p.conversion_rate %>)
-            <% end %>
+            $ <%= number_with_delimiter(p.amount) %>
           <% end %>
         </td>
-        <td>
-          <% if p.rupees? %>
-            <% total_amount = p.amount * p.quantity %>
-          <% else %>
-            <% total_amount = p.conversion_rate.present? ? (p.amount * p.quantity * p.conversion_rate) : 0 %>
-          <% end %>
-          &#8377;<%= number_with_delimiter(total_amount) %>
-        </td>
-        <td class="<%= total_amount <= p.total_paid ? 'success' : 'danger' %>">          
+        <td class="<%= p.amount <= p.total_paid ? 'success' : 'danger' %>">          
           &#8377;<%= number_with_delimiter(p.total_paid) %>
         </td>
         <td><%= p.get_payment_type %></td>
+        <td><%= p.payment_date.strftime("%d/%m/%y") %></td>
         <td>
           <%= link_to edit_purchase_path(p) do %>
             <button class="btn btn-info" type="submit">Edit</button>

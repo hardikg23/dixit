@@ -56,7 +56,7 @@ class PurchasesController < ApplicationController
     end
 
     def purchase_params
-      params.require(:purchase).permit(:entity_id, :description, :sale_type, :quantity, :amount, :amount_type, :payment_type, :conversion_rate, :payment_date, :purchase_date)
+      params.require(:purchase).permit(:entity_id, :description, :sale_type, :quantity, :amount, :amount_type, :payment_type, :conversion_rate, :per_carat_rate, :payment_date, :purchase_date)
     end
 
 end

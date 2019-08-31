@@ -24,7 +24,13 @@
       <% @payments && @payments.each do |p| %>
         <tr>
           <td><%= p.payment_date.strftime("%d/%m/%y") %></td>
-          <td><%= p.amount %></td>
+          <td>
+            <% if p.rupees? %>
+              &#8377; <%= number_with_delimiter(p.amount) %>
+            <% else %>
+              $ <%= number_with_delimiter(p.amount) %>(<%= p.conversion_rate %>)
+            <% end %>
+          </td>
           <td><%= p.get_payment_type %></td>
           <td><%= p.from_person %></td>
           <td><%= p.to_person %></td>

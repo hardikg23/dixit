@@ -28,7 +28,13 @@
         <td>
           <b><span class="font12"><%= p.entity.name %></span></b>
         </td>
-        <td><%= p.amount %></td>
+        <td>
+          <% if p.rupees? %>
+            &#8377; <%= number_with_delimiter(p.amount) %>
+          <% else %>
+            $ <%= number_with_delimiter(p.amount) %>(<%= p.conversion_rate %>)
+          <% end %>
+        </td>
         <td><%= p.payment_type %></td>
         <td>
           <%= link_to edit_payment_path(p) do %>

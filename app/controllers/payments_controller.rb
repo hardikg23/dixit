@@ -35,7 +35,7 @@ class PaymentsController < ApplicationController
 
   private
     def payment_params
-      params.require(:payment).permit(:amount, :description, :from_person, :to_person,  :payment_type, :payment_date)
+      params.require(:payment).permit(:amount, :description, :from_person, :to_person,  :payment_type, :payment_date, :amount_type, :conversion_rate)
     end
 
     def find_parent

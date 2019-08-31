@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_31_045417) do
+ActiveRecord::Schema.define(version: 2019_08_31_053222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 2019_08_31_045417) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "state", default: 1
+    t.integer "amount_type"
+    t.float "conversion_rate"
   end
 
   create_table "purchases", force: :cascade do |t|
@@ -54,6 +56,7 @@ ActiveRecord::Schema.define(version: 2019_08_31_045417) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "state", default: 1
+    t.float "per_carat_rate"
   end
 
   create_table "sales", force: :cascade do |t|
