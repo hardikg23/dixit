@@ -1,14 +1,4 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-12 primary">
-      <div class="pad10 white--text font15">Add New Payment</div>
-    </div>
-  </div>
-  <section>
-    <%= form_for @payment do |f| %>
-      <%= render "payments/form", :f => f %>
-    <% end %>
-  </section>
   <div class="padt50">
     All Payments
     <table class="table table-striped table-bordered">
@@ -45,7 +35,24 @@
           </td>
         </tr>
       <% end %>
+      <tr>
+        <th>Total</th>
+        <th colspan="6">
+          <%= get_conversion_rate(@payments) if @payments %>
+        </th>
+      </tr>
     </table>
   </div>
+
+  <div class="row">
+    <div class="col-md-12 primary">
+      <div class="pad10 white--text font15">Add New Payment</div>
+    </div>
+  </div>
+  <section>
+    <%= form_for @payment do |f| %>
+      <%= render "payments/form", :f => f %>
+    <% end %>
+  </section>
 </div>
 

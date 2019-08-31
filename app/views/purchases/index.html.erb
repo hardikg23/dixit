@@ -25,6 +25,7 @@
       <th>Per Carat</th>
       <th>Total</th>
       <th>Total Paid</th>
+      <th>Rate</th>
       <th>Type</th>
       <th>Due Date</th>
       <th></th>
@@ -46,9 +47,8 @@
             $ <%= number_with_delimiter(p.amount) %>
           <% end %>
         </td>
-        <td>          
-          <%= number_with_delimiter(p.total_paid) %>
-        </td>
+        <td><%= number_with_delimiter(p.total_paid) %></td>
+        <td><%= get_conversion_rate(p.payments.active) if p.payments.active.present? %></td>
         <td><%= p.get_payment_type %></td>
         <td><%= p.payment_date.strftime("%d/%m/%y") %></td>
         <td>
