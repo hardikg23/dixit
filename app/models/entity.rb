@@ -9,7 +9,7 @@ class Entity < ApplicationRecord
   # validates_format_of :mobile, :with => /\A[0-9]+\Z/, :message => " : Please enter correct mobile No", :allow_blank => true
 
   def get_entity_name_for_select_options
-    "#{name} (#{mobile})"
+    "#{self.get_display_name} (#{mobile})"
   end
 
   def get_display_name
