@@ -19,6 +19,7 @@
   <table class="table table-striped table-bordered">
     <tr>
       <th>Date</th>
+      <th>Invoice</th>
       <th>Party</th>
       <th>Carat</th>
       <th>Per Carat</th>
@@ -30,8 +31,9 @@
     </tr>
 
     <% @purchases && @purchases.each do |p| %>
-      <tr>
+      <tr class="<%= p.amount <= p.total_paid ? 'success' : 'bg-danger' %>">
         <td><%= p.purchase_date.strftime("%d/%m/%y") %></td>
+        <td><%= p.invoice_number %></td>
         <td>
           <b><span class="font12"><%= p.entity && p.entity.get_display_name %></span></b>
         </td>
@@ -44,7 +46,7 @@
             $ <%= number_with_delimiter(p.amount) %>
           <% end %>
         </td>
-        <td class="<%= p.amount <= p.total_paid ? 'success' : 'danger' %>">          
+        <td>          
           &#8377;<%= number_with_delimiter(p.total_paid) %>
         </td>
         <td><%= p.get_payment_type %></td>

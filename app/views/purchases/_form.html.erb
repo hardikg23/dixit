@@ -4,8 +4,12 @@
     <%= f.collection_select :entity_id, Entity.all.order('name') , :id, :get_entity_name_for_select_options, {}, { :class => ""} %>
   </div>
   <div class="form-group">
-    <label class="padt10">Sale Type</label>
+    <label class="padt10">Purchase Type</label>
     <%= select("purchase", "sale_type", [['Polish', 'polish'],['Rough', 'rough']], {}, { :class => ""})%>
+  </div>
+  <div class="form-group">
+    <label class="padt10">Invoice Number</label>
+    <%= f.text_field :invoice_number, class: 'form-control' %>
   </div>
   <div class="form-group">
     <label class="padt10">Description</label>
