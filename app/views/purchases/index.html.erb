@@ -31,7 +31,7 @@
     </tr>
 
     <% @purchases && @purchases.each do |p| %>
-      <tr class="<%= p.amount <= p.total_paid ? 'success' : 'bg-danger' %>">
+      <tr class="<%= p.amount <= p.total_paid ? 'success' : 'danger' %>">
         <td><%= p.purchase_date.strftime("%d/%m/%y") %></td>
         <td><%= p.invoice_number %></td>
         <td>
@@ -47,7 +47,7 @@
           <% end %>
         </td>
         <td>          
-          &#8377;<%= number_with_delimiter(p.total_paid) %>
+          <%= number_with_delimiter(p.total_paid) %>
         </td>
         <td><%= p.get_payment_type %></td>
         <td><%= p.payment_date.strftime("%d/%m/%y") %></td>

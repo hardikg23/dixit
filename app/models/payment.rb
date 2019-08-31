@@ -12,7 +12,7 @@ class Payment < ApplicationRecord
 
   def update_sale_or_purchase
     parent = self.paymentable
-    all_payment_sum = parent.payments.sum(:amount)
+    all_payment_sum = parent.payments.active.sum(:amount)
     if parent.class == Sale
       parent.update_columns(total_received: all_payment_sum)
     else

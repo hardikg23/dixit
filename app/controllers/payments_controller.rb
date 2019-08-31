@@ -3,7 +3,7 @@ class PaymentsController < ApplicationController
 
   def new
     @payment = Payment.new
-    @payments = @parent.payments.order('payment_date')
+    @payments = @parent.payments.active.order('payment_date')
   end
 
   def create
@@ -31,6 +31,16 @@ class PaymentsController < ApplicationController
       flash[:error] = @payment.errors.full_messages.first
       render :edit
     end
+  end
+
+  def destroy
+    @payment = Payment.find_by_id(params[:id])
+    if @payment.update_attributes(state: 2)
+      flash[:notice] = 'payment successfully deleted.'
+    else
+      flash[:notice] = 'error on payment delete.'
+    end
+    redirect_to (@payment.paymentable_type == 'Sale' ? sales_path : purchases_path)
   end
 
   private

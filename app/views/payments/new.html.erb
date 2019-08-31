@@ -39,6 +39,9 @@
             <%= link_to edit_payment_path(p) do %>
               <button class="btn btn-info" type="submit">Edit</button>
             <% end %>
+            <%= link_to payment_path(p), method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <button class="btn btn-danger" type="submit">Delete</button>
+            <% end %>
           </td>
         </tr>
       <% end %>
