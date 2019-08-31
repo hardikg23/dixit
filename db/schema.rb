@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_28_044411) do
+ActiveRecord::Schema.define(version: 2019_08_31_045417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2019_07_28_044411) do
     t.datetime "payment_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "state", default: 1
   end
 
   create_table "purchases", force: :cascade do |t|
@@ -43,15 +44,16 @@ ActiveRecord::Schema.define(version: 2019_07_28_044411) do
     t.integer "sale_type", null: false
     t.string "description"
     t.float "quantity"
-    t.integer "amount", null: false
+    t.float "amount", null: false
     t.integer "amount_type", null: false
-    t.integer "conversion_rate"
-    t.integer "total_paid", default: 0
+    t.float "conversion_rate"
+    t.float "total_paid", default: 0.0
     t.integer "payment_type", null: false
     t.datetime "payment_date"
     t.datetime "purchase_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "state", default: 1
   end
 
   create_table "sales", force: :cascade do |t|
@@ -61,15 +63,16 @@ ActiveRecord::Schema.define(version: 2019_07_28_044411) do
     t.string "broker_name"
     t.float "quantity", null: false
     t.float "return_quantity", default: 0.0
-    t.integer "amount", null: false
+    t.float "amount", null: false
     t.integer "amount_type", null: false
-    t.integer "conversion_rate"
-    t.integer "total_received", default: 0
+    t.float "conversion_rate"
+    t.float "total_received", default: 0.0
     t.integer "payment_type", null: false
     t.datetime "payment_date"
     t.integer "terms"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "state", default: 1
   end
 
 end

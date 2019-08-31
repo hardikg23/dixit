@@ -42,7 +42,7 @@
   </div>
   <div class="form-group">
     <label class="padt10">Payment Date</label>
-    <%= f.date_select :payment_date %>
+    <%= f.date_select :payment_date, order: [:day, :month, :year] %>
   </div>
 
   <div class="form-group">

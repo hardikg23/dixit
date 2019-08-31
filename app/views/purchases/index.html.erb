@@ -32,7 +32,7 @@
       <tr>
         <td><%= p.payment_date.strftime("%d/%m/%y") %></td>
         <td>
-          <b><span class="font12"><%= p.entity && p.entity.name %></span></b>
+          <b><span class="font12"><%= p.entity && p.entity.get_display_name %></span></b>
         </td>
         <td><%= p.quantity %></td>
         <td>
@@ -61,9 +61,12 @@
           <%= link_to edit_purchase_path(p) do %>
             <button class="btn btn-info" type="submit">Edit</button>
           <% end %>
+          <%= link_to purchase_path(p), method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <button class="btn btn-danger" type="submit">Delete</button>
+          <% end %>
           <%= link_to new_payment_path(purchase_id: p.id) do %>
-              <button class="btn btn-info" type="submit">Payments</button>
-            <% end %>
+            <button class="btn btn-info" type="submit">Payments</button>
+          <% end %>
         </td>
       </tr>
     <% end %>

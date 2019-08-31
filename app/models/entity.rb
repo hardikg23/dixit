@@ -11,5 +11,9 @@ class Entity < ApplicationRecord
   def get_entity_name_for_select_options
     "#{name} (#{mobile})"
   end
+
+  def get_display_name
+    self.company_name.present? ? self.company_name : self.name
+  end
   
 end
