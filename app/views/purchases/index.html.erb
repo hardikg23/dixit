@@ -39,14 +39,17 @@
           <% if p.rupees? %>
             Rs <%= p.amount %>
           <% else %>
-            $ <%= p.amount %> <br>(<%= p.conversion_rate %>)
+            $ <%= p.amount %> <br>
+            <% if p.conversion_rate.present? %>
+              (<%= p.conversion_rate %>)
+            <% end %>
           <% end %>
         </td>
         <td>
           <% if p.rupees? %>
             <% total_amount = p.amount * p.quantity %>
           <% else %>
-            <% total_amount = p.amount * p.quantity * p.conversion_rate %>
+            <% total_amount = p.conversion_rate.present? ? (p.amount * p.quantity * p.conversion_rate) : 0 %>
           <% end %>
           &#8377;<%= number_with_delimiter(total_amount) %>
         </td>
