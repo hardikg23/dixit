@@ -3,11 +3,11 @@ class ApplicationController < ActionController::Base
   helper_method :current_page, :per_page, :display_cheque?
 
   def session_cheque
-    return if params[:cheque].blank?
-    if params[:cheque] == "false"
-      session[:cheque] = false
+    return if params[:only_cheque].blank?
+    if params[:only_cheque] == "false"
+      session[:only_cheque] = false
     else
-      session[:cheque] = nil
+      session[:only_cheque] = nil
     end
   end
 
@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
   def display_cheque?
-    session[:cheque].nil?
+    session[:only_cheque].nil?
   end
 
 end
